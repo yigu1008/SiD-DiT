@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- <link rel="shortcut icon" type="image/png" href="https://www.nvidia.com/favicon.ico"> -->
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiD-DiT</title>
+    <style>
+        .highlight {
+            background-color: #bf560079;
+            color: black;
+            font-weight: 500;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            /* Adjust this value to make the spacing larger */
+            margin: 0;
+            padding: 0;
+            color: black;
+            /* background-image: url('asset/samples/pexels-photo-28821825.jpeg'); Background image */
+            background-size: contain;
+            /* Cover the entire viewport */
+            background-attachment: fixed;
+            /* Fixed background */
+            background-position: center;
+            direction: ltr;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #fff;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            margin: 0.2em 0;
+        }
+
+        .hero h2 {
+            font-size: 2.8em;
+            margin: 0.2em 0;
+            font-weight: normal;
+            line-height: 1;
+            /* Adjust this value to make the spacing larger */
+        }
+
+        .hero p {
+            font-size: 1.4em;
+            margin-bottom: 1em;
+            line-height: 1.3;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            color: white;
+            background-color: black;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        .button_green {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            color: black;
+            background-color: #BF5700;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        .gallery-container {
+            max-width: 77%;
+            /* Limit the width of the gallery */
+            margin: 0 auto;
+            /* Center the gallery */
+            padding: 20px 0;
+            /* Add some padding on top and bottom */
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            /* 12 columns grid */
+            grid-auto-rows: 150px;
+            /* Adjust row height */
+            gap: 10px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            /*aspect-ratio: 1/1; !* Keep the aspect ratio of the images *!*/
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            /* Cursor change on hover */
+            border-radius: 10px;
+            /* Rounded corners */
+            transition: transform 0.3s ease;
+            /* Add smooth transition */
+        }
+
+        /* Image scaling on hover */
+        .gallery-item img:hover {
+            transform: scale(1.2);
+            /* Scale the image to 1.2 times its original size */
+        }
+
+        /* Define specific grid item placements */
+        .item1 {
+            grid-column: span 3;
+            grid-row: span 3;
+        }
+
+        /* Large image */
+        .item2 {
+            grid-column: span 7;
+            grid-row: span 3;
+        }
+
+        /* Smaller image */
+        .item3 {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        /* Horizontal image */
+
+        .item4 {
+            grid-column: span 6;
+            grid-row: span 3;
+        }
+
+        /* Wide image */
+        .item5 {
+            grid-column: span 4;
+            grid-row: span 3;
+        }
+
+        /* Wide image */
+        .item6 {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        /* Wide image */
+
+        .item7 {
+            grid-column: span 4;
+            grid-row: span 4;
+        }
+
+        /* Square image */
+        .item8 {
+            grid-column: span 3;
+            grid-row: span 4;
+        }
+
+        /* Vertical image */
+        .item9 {
+            grid-column: span 2;
+            grid-row: span 4;
+        }
+
+        /* Vertical image */
+        .item10 {
+            grid-column: span 3;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+
+        .item11 {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+        .item12 {
+            grid-column: span 4;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+        .item13 {
+            grid-column: span 2;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+        .item14 {
+            grid-column: span 4;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+
+        .item15 {
+            grid-column: span 4;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+        .item16 {
+            grid-column: span 4;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+        .item17 {
+            grid-column: span 2;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+        .item18 {
+            grid-column: span 2;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+
+        .item19 {
+            grid-column: span 3;
+            grid-row: span 5;
+        }
+
+        /* Another larger image */
+        .item20 {
+            grid-column: span 3;
+            grid-row: span 5;
+        }
+
+        /* Another larger image */
+        .item21 {
+            grid-column: span 3;
+            grid-row: span 5;
+        }
+
+        /* Another larger image */
+        .item22 {
+            grid-column: span 3;
+            grid-row: span 5;
+        }
+
+        /* Another larger image */
+
+        .item23 {
+            grid-column: span 6;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+        .item24 {
+            grid-column: span 3;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+        .item25 {
+            grid-column: span 3;
+            grid-row: span 4;
+        }
+
+        /* Another larger image */
+
+        .item26 {
+            grid-column: span 3;
+            grid-row: span 5;
+        }
+
+        /* Another larger image */
+        .item27 {
+            grid-column: span 3;
+            grid-row: span 5;
+        }
+
+        /* Another larger image */
+        .item28 {
+            grid-column: span 6;
+            grid-row: span 5;
+        }
+
+        /* Another larger image */
+
+        .item29 {
+            grid-column: span 3;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+        .item30 {
+            grid-column: span 3;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+        .item31 {
+            grid-column: span 3;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+        .item32 {
+            grid-column: span 3;
+            grid-row: span 3;
+        }
+
+        /* Another larger image */
+
+
+        /* Modal styling */
+        #modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.9);
+            /* Black w/ opacity */
+            justify-content: center;
+            /* Horizontally center the image */
+            flex-direction: column;
+            align-items: center;
+            /* Center align items vertically */
+        }
+
+        #modal img {
+            margin: auto;
+            display: block;
+            max-width: 77%;
+            max-height: 77%;
+            /* Ensure the image doesn't overflow vertically */
+            object-fit: contain;
+            /* Make sure the aspect ratio is preserved */
+        }
+
+        #modal-description {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            /* Adjust this value to move text closer to the image */
+            font-size: 1.2em;
+        }
+
+        .description {
+            background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
+            border-radius: 24px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+            font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+            font-style: normal;
+            font-size: 16px;
+            line-height: 1.4;
+            color: #333;
+            font-weight: 300;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .description-content {
+            font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+            max-width: 80%;
+            margin: 0 auto 24px auto;
+            padding: 20px;
+            font-style: normal;
+            border-radius: 18px;
+        }
+
+        .description-content h2 {
+            color: #BF5700;
+            font-size: 1.9em;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 2px solid rgba(191, 87, 0, 0.3);
+            padding-bottom: 6px;
+            margin-bottom: 16px;
+            margin-block-start: 0.83em;
+            margin-block-end: 0.83em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-style: normal;
+        }
+
+        .description-content h3 {
+            color: #333;
+            font-size: 1.3em;
+            font-weight: 600;
+            border-left: 4px solid #BF5700;
+            padding-left: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .description-content p {
+            font-size: 1.1em;
+            font-weight: 400;
+            text-align: justify;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
+        }
+
+        .description-content p b {
+            color: #BF5700;
+            font-weight: 600;
+        }
+
+        .description-content a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .description-content a:hover {
+            text-decoration: underline;
+        }
+
+        .citation {
+            /*background-color: #333; !* Solid background color that spans the entire width *!*/
+            font-family: Arial, sans-serif;
+            color: black;
+            padding: 10px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .citation-content {
+            text-align: left;
+            border-radius: 15px;
+            /* Rounded corners */
+            font-size: 0.8em;
+            max-width: 80%;
+            /* Limit the width to 80% of the screen */
+            margin: 0 auto;
+            /* Center the content horizontally */
+            margin-top: -30px;
+            padding: 0;
+            /* Padding inside the border */
+            background-color: #f5f5f5;
+            /* Semi-transparent background inside the section */
+            overflow-x: auto;
+            /* Horizontal scrolling */
+            overflow-y: hidden;
+            /* Prevent vertical scrolling */
+            white-space: nowrap;
+            /* Prevent line breaks */
+        }
+
+        .citation-content h2 {
+            font-size: 2em;
+            text-align: left;
+            font-weight: normal;
+        }
+
+        .citation pre {
+            border-radius: 15px;
+            /* Rounded corners */
+            max-width: 90%;
+            /* Limit the width to 80% of the screen */
+            text-align: left;
+        }
+
+        .footer {
+            background-color: #f5f5f5;
+            box-shadow: 2px 4px 12px #00000054;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+            margin-top: -20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .footer a {
+            color: dodgerblue;
+            text-decoration: none;
+        }
+
+        .inserted-image {
+            max-width: 70%;
+            /* Set the maximum width for the image */
+            height: auto;
+            /* Ensure the height adjusts automatically to maintain aspect ratio */
+            margin: 30px;
+            /* Add space above and below the image */
+            margin-top: 10px;
+            display: block;
+            /* Make sure the image is treated as a block-level element */
+            margin-left: auto;
+            /* Center the image horizontally */
+            margin-right: auto;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px 3px #00000030;
+        }
+
+        .inserted-image-noshadow {
+            max-width: 40%;
+            /* Set the maximum width for the image */
+            margin-left: auto;
+            /* Center the image horizontally */
+            margin-right: auto;
+            border-radius: 10px;
+        }
+
+        .video-container {
+            text-align: center;
+            /* Center the video horizontally */
+            margin: 20px 0;
+            /* Add some vertical margin around the video */
+        }
+
+        video {
+            max-width: 80%;
+            /* The video will scale to fit the container */
+            height: auto;
+            /* Maintain the video's aspect ratio */
+            border-radius: 10px;
+            /* Rounded corners for the video */
+            box-shadow: 2px 2px 10px 3px #00000054;
+        }
+
+        .logo {
+            color: black;
+            display: flex;
+            justify-content: center;
+            /*justify-content: left;*/
+            align-items: center;
+            text-align: center;
+            gap: 60px;
+        }
+
+        .logo-sup {
+            position: absolute;
+            top: -5px;
+            /* Adjust this value to position it closer to the top */
+            right: -10px;
+            /* Adjust this value to move it horizontally */
+            font-size: 14px;
+            /* Increase the size of the superscript */
+            color: black;
+            /* Change the color if needed */
+        }
+
+        /* Image comparison container */
+        .image-comparison-container {
+            background-color: #fff;
+            /* Solid background color that spans the entire width */
+        }
+
+        .image-comparison-content {
+            position: relative;
+            width: 580px;
+            /* Adjust the width as needed */
+            height: 402px;
+            /* Adjust the height as needed */
+            overflow: hidden;
+            /* Make sure overflow isn't hiding any part of the images */
+            margin: 0 auto;
+            margin-top: -20px;
+            cursor: ew-resize;
+            border-radius: 10px;
+        }
+
+        .image-comparison-content img {
+            position: absolute;
+            width: 100%;
+            height: 99%;
+            background-color: #fff;
+            object-fit: contain;
+            /* Use contain to ensure the whole image is visible */
+        }
+
+        .image-comparison-content .slider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: #fff;
+            z-index: 10;
+        }
+
+        .image-comparison-content .slider-black {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background-color: black;
+            z-index: 10;
+        }
+
+        .demo {
+            margin-top: -20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .demo iframe {
+            width: 50%;
+        }
+
+        .image-comparison-content .image-2 {
+            clip-path: inset(0 0 0 50%);
+        }
+
+        .image-comparison-content .image-4 {
+            clip-path: inset(0 0 0 50%);
+        }
+
+        @media (max-width: 4096px) {
+            .gallery {
+                /*grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); !* Adjust columns for smaller screens *!*/
+                grid-auto-columns: 100px;
+                /* Adjust columns for smaller screens */
+                grid-auto-rows: 200px;
+                /* Set a fixed height for the grid items */
+            }
+
+            .demo iframe {
+                width: 800px;
+            }
+        }
+
+        @media (max-width: 2048px) {
+            .gallery {
+                /*grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); !* Adjust columns for smaller screens *!*/
+                grid-auto-columns: 60px;
+                /* Adjust columns for smaller screens */
+                grid-auto-rows: 90px;
+                /* Set a fixed height for the grid items */
+            }
+
+            .demo iframe {
+                width: 800px;
+            }
+        }
+
+        @media (min-width: 2048px) {
+            .description-content {
+                max-width: 728px;
+                /* Limit the width to 80% of the screen */
+                padding: 10px;
+                /* Padding inside the border */
+            }
+
+            .citation-content {
+                max-width: 728px;
+                /* Limit the width to 80% of the screen */
+                padding: 10px;
+                /* Padding inside the border */
+            }
+
+            .inserted-image {
+                max-width: 70%;
+                /* Limit the width to 80% of the screen */
+                padding: 10px;
+                /* Padding inside the border */
+            }
+
+            .inserted-image-noshadow {
+                max-width: 40%;
+                /* Limit the width to 80% of the screen */
+            }
+
+            video {
+                max-width: 1024px;
+                /* The video will scale to fit the container */
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .gallery {
+                /*grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); !* Adjust columns for smaller screens *!*/
+                grid-auto-columns: 40px;
+                /* Adjust columns for smaller screens */
+                grid-auto-rows: 70px;
+                /* Set a fixed height for the grid items */
+            }
+
+            .demo iframe {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .description-content {
+                max-width: 728px;
+                /* Limit the width to 80% of the screen */
+                padding: 10px;
+                /* Padding inside the border */
+            }
+
+            .citation-content {
+                max-width: 728px;
+                /* Limit the width to 80% of the screen */
+                padding: 10px;
+                /* Padding inside the border */
+            }
+
+            .inserted-image {
+                max-width: 70%;
+                /* Limit the width to 80% of the screen */
+                padding: 5px;
+                /* Padding inside the border */
+            }
+
+            .inserted-image-noshadow {
+                max-width: 40%;
+                /* Limit the width to 80% of the screen */
+            }
+
+            video {
+                max-width: 728px;
+                /* The video will scale to fit the container */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                /*grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); !* Adjust columns for smaller screens *!*/
+                grid-auto-columns: 20px;
+                /* Adjust columns for smaller screens */
+                grid-auto-rows: 30px;
+                /* Set a fixed height for the grid items */
+                gap: 5px;
+            }
+
+            .gallery-container {
+                max-width: 85%;
+                /* Limit the width of the gallery */
+                padding: 10px 0;
+                /* Add some padding on top and bottom */
+            }
+
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            .hero h2 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .description-content {
+                max-width: 92%;
+                /* Limit the width to 80% of the screen */
+                padding: 10px;
+                /* Padding inside the border */
+            }
+
+            .citation-content {
+                max-width: 92%;
+                /* Limit the width to 80% of the screen */
+                padding: 10px;
+                /* Padding inside the border */
+            }
+
+            .inserted-image {
+                max-width: 70%;
+                /* Limit the width to 80% of the screen */
+                padding: 5px;
+                /* Padding inside the border */
+            }
+
+            .inserted-image-noshadow {
+                max-width: 40%;
+                /* Limit the width to 80% of the screen */
+                margin-left: auto;
+                /* Center the image horizontally */
+                margin-right: auto;
+            }
+
+            .image-comparison-content {
+                max-height: 300px;
+                /* Limit the width to 80% of the screen */
+                max-width: 92%;
+            }
+
+            video {
+                max-width: 92%;
+                /* The video will scale to fit the container */
+            }
+
+            .logo {
+                gap: 10px;
+            }
+
+            .demo iframe {
+                width: 95%;
+            }
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            .description {
+                background-color: #333;
+                /* Dark color for dark mode */
+                color: white;
+                /* Light text color for dark mode */
+            }
+
+            .description_noborder {
+                background-color: #333;
+                /* Dark color for dark mode */
+                color: white;
+                /* Light text color for dark mode */
+            }
+
+            .description_noborder h2 {
+                background-color: #333;
+                /* Dark color for dark mode */
+                color: white;
+                /* Light text color for dark mode */
+            }
+
+            .description-content h2 {
+                background-color: #333;
+                /* Dark color for dark mode */
+                color: white;
+                /* Light text color for dark mode */
+            }
+
+            .citation {
+                background-color: #333;
+                /* Dark color for dark mode */
+                color: white;
+                /* Light text color for dark mode */
+            }
+
+            .citation-content {
+                background-color: #555;
+                /* Dark color for dark mode */
+            }
+
+            .citation-content h2 {
+                background-color: #555;
+                /* Dark color for dark mode */
+            }
+
+            .footer {
+                background-color: #222;
+                /* Dark color for dark mode */
+                color: white;
+            }
+
+            .image-comparison-container {
+                background-color: #333;
+                /* Dark color for dark mode */
+            }
+
+            .demo {
+                background-color: #333;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!--    <div style="overflow: hidden; background-color: #6699cc;">-->
+    <!--      <div class="container">-->
+    <!--        <a href="https://www.nvidia.com/" style="float: left; color: black; text-align: center; padding: 12px 16px; text-decoration: none; font-size: 16px;"><img width="100%" src="https://nv-tlabs.github.io/3DStyleNet/assets/nvidia.svg"></a>-->
+    <!--        <a href="https://github.com/Efficient-Large-Model/" style="float: left; color: black; text-align: center; padding: 14px 16px; text-decoration: none; font-size: 16px;"><strong>Efficient AI Group</strong></a>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <div class="hero">
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <!-- <img src="asset/logo.jpg" alt="Logo" style="width: 50px; height: auto; margin-right: 5px;"> -->
+            <h1 style="margin: 0; color: #BF5700;">SiD-DiT</h1>
+        </div>
+        <h2>Score Distillation of Flow Matching Models</h2>
+        <!-- <p>Exploring the Frontiers of Efficient Generative Foundation Models</p> -->
+        <p>arxiv 2025</p>
+
+        <!-- Add author and institution information -->
+        <!-- Mingyuan Zhou1∗
+                    , Yi Gu1
+                    , Huangjie Zheng2
+                    , Liangchen Song2
+                    , Guande He1
+                    ,
+                    Yizhe Zhang2
+                    , Wenze Hu2
+                    , Yinfei Yang2 -->
+        <div style="margin-top: 20px; text-align: center;">
+            <p style="font-size: 1.3em; margin-bottom: 5px;">
+                <a href="https://mingyuanzhou.github.io/index.html" target="_blank" style="color: #BF5700;">Mingyuan
+                    Zhou</a><sup>1*</sup>,
+                <a href="https://www.linkedin.com/in/yi-gu-6b19991aa/" target="_blank" style="color: #BF5700;">Yi
+                    Gu</a><sup>1</sup>,
+                <a href="http://huangjiezheng.com/" target="_blank" style="color: #BF5700;">Huangjie
+                    Zheng</a><sup>1</sup>,
+                <a href="https://guandehe.github.io/" target="_blank" style="color: #BF5700;">Guande He</a><sup>1</sup>,
+                <a href="https://dreasysnail.github.io/" target="_blank" style="color: #BF5700;">Yizhe
+                    Zhang</a><sup>2</sup>,<br>
+                <a href="https://scholar.google.com/citations?user=0YPYs5UAAAAJ&hl=en" target="_blank"
+                    style="color: #BF5700;">Wenze Hu</a><sup>2</sup>,
+                <a href="https://sites.google.com/site/yinfeiyang" target="_blank" style="color: #BF5700;">Yinfei
+                    Yang</a><sup>2</sup>
+            </p>
+            <p style="font-size: 1.2em; color: #888;">
+                <sup>1</sup>UT Austin, <sup>2</sup>Apple
+                <br>
+                *This work was done while visiting Apple.
+            </p>
+        </div>
+        <!--        <div style="overflow: hidden; background-color: #6699cc;">-->
+        <div style="overflow: hidden; background-color: #fff;">
+            <div class="logo" style="padding: 6px;">
+                <a href="https://www.utexas.edu/" style="text-decoration: none; font-size: 16px;">
+                    <img src="asset/UT_logo.png" alt="UT Logo" style="width: auto; height: 40px;">
+                </a>
+                <a href="https://www.apple.com/" style="text-decoration: none; font-size: 16px;">
+                    <img src="asset/Apple_logo_black.svg" alt="Apple Logo" style="width: auto; height: 40px;">
+                </a>
+            </div>
+        </div>
+
+        <a href="https://arxiv.org/abs/2509.25127" class="button">Paper</a>
+        <a href="https://github.com/NVlabs/Sana" class="button">Code</a>
+        <a href="https://huggingface.co/collections/Efficient-Large-Model/sana-673efba2a57ed99843f11f9e"
+            class="button">Huggingface</a>
+        <a href="https://huggingface.co/spaces/YGu1998/sid-dit" class="button">Demo</a>
+        <!-- <a href="https://sana.hanlab.ai/4bit/" class="button">4bit Demo</a>
+        <a href="https://sana.hanlab.ai/ctrlnet/" class="button">ControlNet Demo</a>
+        <a href="https://replicate.com/chenxwh/sana" class="button">Replicate API</a> -->
+        <br>
+        <a href="https://github.com/mingyuanzhou/SiD" class="button_green">SiD</a>
+        <a href="https://github.com/mingyuanzhou/SiD-LSG" class="button_green">SiD-LSG</a>
+        <a href="https://github.com/mingyuanzhou/SiD/tree/sida" class="button_green">SiDA</a>
+    </div>
+
+    <!-- Model gallery injected from asset/images -->
+    <style>
+        .model-gallery {
+            max-width: 80%;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .model-thumbs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .model-card {
+            cursor: pointer;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            text-align: center;
+            background: #f8f8f8;
+            transition: border-color 0.2s ease;
+        }
+
+        .model-card.active {
+            border-color: #BF5700;
+            box-shadow: 0 0 0 2px rgba(191, 87, 0, 0.15) inset;
+        }
+
+        .model-card img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .model-label {
+            padding: 6px 8px;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        #model-display {
+            margin-top: 16px;
+        }
+
+        #model-title {
+            text-align: center;
+            color: #BF5700;
+            margin: 8px 0 12px;
+            font-size: 1.4em;
+            font-weight: 700;
+        }
+
+        .model-images {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        .model-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px 3px #00000030;
+        }
+
+        @media (max-width: 768px) {
+            .model-images {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .model-card img {
+                height: 80px;
+            }
+        }
+    </style>
+
+    <div class="model-gallery">
+        <div class="model-thumbs" id="model-thumbs"></div>
+        <div id="model-display">
+            <div id="model-title"></div>
+            <div class="model-images" id="model-images"></div>
+        </div>
+    </div>
+
+    <script>
+        // Predefined model folders, thumbnails (grid) and 8 images each
+        const models = {
+            
+            "sana06512": {
+                label: "SANA-0.6-512px",
+                grid: "asset/images/sana06512/grid_2x4_000_1762552166.png",
+                images: [
+                    "asset/images/sana06512/0000_Close-up_of_a_ballet_dancer_tying_ribbons_on_her_shoes_studi_42.png",
+                    "asset/images/sana06512/0001_Bearded_traveler_photographed_in_desert_with_sandstorm_behin_1337.png",
+                    "asset/images/sana06512/0002_Digital_cartoon_of_a_frog_detective_holding_a_magnifying_gla_1940802512.png",
+                    "asset/images/sana06512/0003_3D-style_cartoon_of_a_penguin_pilot_flying_a_toy_plane_over_1023051522.png",
+                    "asset/images/sana06512/0004_Autumn_forest_trail_covered_with_golden_leaves_sunbeams_thro_1539583542.png",
+                    "asset/images/sana06512/0005_Desert_night_scene_with_glowing_campfire_beside_caravan_tent_22706002.png",
+                    "asset/images/sana06512/0006_Wooden_chess_pieces_on_a_marble_board_mid-game_warm_studio_l_1950140149.png",
+                    "asset/images/sana06512/0007_Luxury_perfume_bottle_with_crystal_stopper_on_mirrored_surfa_1428980626.png"
+                ]
+            },
+            "sana16512": {
+                label: "SANA-1.6-512px",
+                grid: "asset/images/sana16512/grid_2x4_000_1762554245.png",
+                images: [
+                    "asset/images/sana16512/0000_A_man_is_standing_in_front_of_a_river_holding_a_walking_stic_42.png",
+                    "asset/images/sana16512/0001_Painting_of_a_group_of_children_standing_in_a_dark_backgroun_1337.png",
+                    "asset/images/sana16512/0002_Stylized_illustration_of_a_snowy_ski_slope_with_lifts_and_sk_1652557625.png",
+                    "asset/images/sana16512/0003_Vibrant_cartoon-style_city_street_at_night_with_tall_buildin_1544590807.png",
+                    "asset/images/sana16512/0004_Large_white_teepee_tent_in_a_forest_clearing_soft_bedding_an_673514737.png",
+                    "asset/images/sana16512/0005_Painting_of_two_brown_bears_walking_beside_a_fountain_in_a_g_1806207810.png",
+                    "asset/images/sana16512/0006_Realistic_still-life_of_fruits_and_flowers_under_soft_light_51444342.png",
+                    "asset/images/sana16512/0007_Close-up_portrait_of_an_elderly_man_wearing_a_blue_scarf_aga_55155037.png"
+                ]
+            },
+            "sprint061024": {
+                label: "SANA-SPRINT-0.6B-1024px",
+                grid: "asset/images/sprint061024/grid_2x4_000_1762552256.png",
+                images: [
+                    "asset/images/sprint061024/0000_Digital_painting_of_a_baby_elephant_near_a_sidewalk_with_tre_42.png",
+                    "asset/images/sprint061024/0001_Close-up_realistic_photograph_of_a_sandwich_with_melted_Swis_1337.png",
+                    "asset/images/sprint061024/0002_Painting_of_two_small_children_sitting_on_train_tracks_wrapp_992958495.png",
+                    "asset/images/sprint061024/0003_Black-and-white_photograph_of_mounted_police_on_horses_splas_1381960987.png",
+                    "asset/images/sprint061024/0004_Colorful_illustration_of_airplanes_flying_over_a_geometric_c_924852851.png",
+                    "asset/images/sprint061024/0005_Digital_painting_of_a_surreal_clock_tower_over_a_city_of_boo_1444481997.png",
+                    "asset/images/sprint061024/0006_Photograph_of_a_woman_in_plaid_shirt_with_backpack_holding_a_1257532410.png",
+                    "asset/images/sprint061024/0007_Black-and-white_illustration_of_two_storks_standing_in_a_top_743672015.png"
+                ]
+            },
+            "sprint161024": {
+                label: "SANA-SPRINT-1.6B-1024px",
+                grid: "asset/images/sprint161024/grid_2x4_000_1762554951.png",
+                images: [
+                    "asset/images/sprint161024/0000_Painting_of_a_lone_figure_sitting_on_a_bench_by_the_ocean_un_42.png",
+                    "asset/images/sprint161024/0001_Realistic_painting_of_a_bats_face_against_a_dark_background_1337.png",
+                    "asset/images/sprint161024/0002_A_dog_sitting_at_a_desk_using_a_computer_with_city_street_di_784976647.png",
+                    "asset/images/sprint161024/0003_Painting_of_a_serene_camping_tent_interior_with_lamp_and_pil_345367876.png",
+                    "asset/images/sprint161024/0004_Photograph_of_colorful_buses_parked_beside_a_vibrant_buildin_676150285.png",
+                    "asset/images/sprint161024/0005_Close-up_of_a_meal_plate_with_rice_beans_vegetables_and_drin_1641289110.png",
+                    "asset/images/sprint161024/0006_Painting_of_a_realistic_cake_shaped_like_a_man_in_a_purple_s_280816185.png",
+                    "asset/images/sprint161024/0007_Black-and-white_illustration_of_two_storks_standing_in_a_top_2135054467.png"
+                ]
+            },
+            "sd3": {
+                label: "SD3-MEDIUM",
+                grid: "asset/images/sd3/grid_2x4_000_1762551105.png",
+                images: [
+                    "asset/images/sd3/0000_Portrait_of_a_man_in_a_leather_jacket_standing_in_front_of_c_42.png",
+                    "asset/images/sd3/0001_A_young_woman_wearing_a_red_raincoat_holding_a_yellow_umbrel_1337.png",
+                    "asset/images/sd3/0002_Hand-drawn_cartoon_of_a_sleepy_cat_sitting_in_a_ramen_bowl_s_481170830.png",
+                    "asset/images/sd3/0003_Playful_cartoon_of_a_smiling_sun_wearing_sunglasses_over_a_d_1018331720.png",
+                    "asset/images/sd3/0004_Vast_canyon_with_a_small_river_glistening_below_layered_red_333215656.png",
+                    "asset/images/sd3/0005_Forest_clearing_at_dusk_with_fireflies_glowing_over_mossy_st_1473095201.png",
+                    "asset/images/sd3/0006_Transparent_glass_teapot_on_a_wooden_tray_with_steam_rising_757208062.png",
+                    "asset/images/sd3/0007_Polished_chrome_headphones_on_a_velvet_surface_focused_spot_1513188000.png"
+                ]
+            },
+            "sd3.5m": {
+                label: "SD3.5-MEDIUM",
+                grid: "asset/images/sd3.5m/grid_2x4_000_1762552746.png",
+                images: [
+                    "asset/images/sd3.5m/0000_The_style_of_the_image_is_realistic_featuring_a_large_gray_b_42.png",
+                    "asset/images/sd3.5m/0001_Black_and_white_photograph_of_a_person_dressed_in_a_detailed_1337.png",
+                    "asset/images/sd3.5m/0002_Painting_of_a_red_pickup_truck_parked_in_a_moonlit_forest_su_674298487.png",
+                    "asset/images/sd3.5m/0003_Painting_of_a_man_in_a_brown_hat_and_orange_tie_holding_two_67310200.png",
+                    "asset/images/sd3.5m/0004_A_person_holding_a_bright_yellow_tennis_ball_under_a_blue_sk_1256540883.png",
+                    "asset/images/sd3.5m/0005_Close-up_of_a_pepperoni_pizza_with_a_fork_and_knife_stuck_in_1516693303.png",
+                    "asset/images/sd3.5m/0006_Photograph_of_a_vibrant_turquoise_fruit_cart_filled_with_ora_1536235233.png",
+                    "asset/images/sd3.5m/0007_Digital_artwork_showing_a_floating_remote_control_in_the_clo_897223253.png"
+                ]
+            },
+            "sd3.5l": {
+                label: "SD3.5-LARGE",
+                grid: "asset/images/sd3.5l/grid_2x4_000_1762551216.png",
+                images: [
+                    "asset/images/sd3.5l/0000_Elderly_fisherman_sitting_on_a_pier_repairing_nets_soft_morn_42.png",
+                    "asset/images/sd3.5l/0001_Woman_wearing_traditional_attire_standing_by_window_light_wi_1337.png",
+                    "asset/images/sd3.5l/0002_Cartoon_astronaut_waving_from_a_moon_crater_beside_a_smiling_941303549.png",
+                    "asset/images/sd3.5l/0003_Bright_comic-style_dinosaur_skateboarding_through_a_city_par_1905891040.png",
+                    "asset/images/sd3.5l/0004_Mountain_lake_at_sunrise_with_mirror_reflection_of_pine_fore_464163790.png",
+                    "asset/images/sd3.5l/0005_Windy_coastal_cliff_with_lighthouse_under_pink_dusk_sky_wave_938319170.png",
+                    "asset/images/sd3.5l/0006_A_silver_pocket-watch_resting_on_open_map_pages_vintage_adve_1371845105.png",
+                    "asset/images/sd3.5l/0007_Macro_photograph_of_chocolate_truffles_with_cocoa_dust_shall_153229712.png"
+                ]
+            },
+            "flux-512": {
+                label: "FLUX-512px",
+                grid: "asset/images/flux-512/grid_2x4_000_1762559763.png",
+                images: [
+                    "asset/images/flux-512/0000_A_large_airplane_flying_through_dramatic_cloudy_skies_captur_42.png",
+                    "asset/images/flux-512/0001_Painting_of_a_family_standing_in_front_of_a_red_parking_mete_1337.png",
+                    "asset/images/flux-512/0002_Digital_artwork_of_a_cozy_couch_with_cupcakes_and_a_cake_str_1157942288.png",
+                    "asset/images/flux-512/0003_Photograph_of_a_herd_of_cows_standing_in_tall_grass_under_an_505929244.png",
+                    "asset/images/flux-512/0004_Close-up_photo_of_a_black_and_white_dog_resting_its_head_on_2093014531.png",
+                    "asset/images/flux-512/0005_Digital_artwork_of_an_astronaut_standing_in_a_rocky_cave_loo_358863767.png",
+                    "asset/images/flux-512/0006_Illustration_of_a_woman_jumping_indoors_playing_with_colorfu_745550495.png",
+                    "asset/images/flux-512/0007_A_man_sitting_on_a_bed_reading_a_book_modern_bedroom_interio_1100418827.png"
+                ]
+            },
+            "flux-1024": {
+                label: "FLUX-1024px",
+                grid: "asset/images/flux-1024/grid_2x4_000_1762560249.png",
+                images: [
+                    "asset/images/flux-1024/0000_A_large_airplane_flying_through_dramatic_cloudy_skies_captur_42.png",
+                    "asset/images/flux-1024/0001_Painting_of_a_family_standing_in_front_of_a_red_parking_mete_1337.png",
+                    "asset/images/flux-1024/0002_Digital_artwork_of_a_cozy_couch_with_cupcakes_and_a_cake_str_212823364.png",
+                    "asset/images/flux-1024/0003_Photograph_of_a_herd_of_cows_standing_in_tall_grass_under_an_714891957.png",
+                    "asset/images/flux-1024/0004_Close-up_photo_of_a_black_and_white_dog_resting_its_head_on_108616197.png",
+                    "asset/images/flux-1024/0005_Digital_artwork_of_an_astronaut_standing_in_a_rocky_cave_loo_921087729.png",
+                    "asset/images/flux-1024/0006_Illustration_of_a_woman_jumping_indoors_playing_with_colorfu_2057357598.png",
+                    "asset/images/flux-1024/0007_A_man_sitting_on_a_bed_reading_a_book_modern_bedroom_interio_1612006472.png"
+                ]
+            },
+            
+        };
+
+        const thumbsEl = document.getElementById('model-thumbs');
+        const titleEl = document.getElementById('model-title');
+        const imagesEl = document.getElementById('model-images');
+
+        function renderThumbs() {
+            thumbsEl.innerHTML = '';
+            Object.entries(models).forEach(([key, m], idx) => {
+                const card = document.createElement('div');
+                card.className = 'model-card' + (idx === 0 ? ' active' : '');
+                card.dataset.model = key;
+                card.innerHTML = `
+                    <img src="${m.grid}" alt="${m.label} grid">
+                    <div class="model-label">SiD-${m.label}</div>
+                `;
+                card.addEventListener('click', () => selectModel(key));
+                thumbsEl.appendChild(card);
+            });
+        }
+
+        function selectModel(key) {
+            // active state
+            [...thumbsEl.children].forEach(el => el.classList.toggle('active', el.dataset.model === key));
+            const m = models[key];
+            titleEl.textContent = 'SiD-' + m.label;
+            imagesEl.innerHTML = m.images.map(src => `<img src="${src}" alt="${m.label}">`).join('');
+        }
+
+        // Init
+        renderThumbs();
+        // Select first by default
+        selectModel(Object.keys(models)[0]);
+    </script>
+
+    <section class="description">
+        <div>
+            <!-- <img src="asset/SANA.png" alt="Sana-logo" class="inserted-image-noshadow"> -->
+        </div>
+
+        <div class="description-content">
+            <h2>About SiD-DiT</h2>
+            <p>Diffusion models achieve high-quality image generation but are limited by slow
+                iterative sampling. Distillation methods alleviate this by enabling one- or fewstep generation. Flow
+                matching, originally introduced as a distinct framework,
+                has since been shown to be theoretically equivalent to diffusion under Gaussian assumptions, raising the
+                question of whether distillation techniques such as
+                score distillation transfer directly. We provide a simple derivation—based on
+                Bayes’ rule and conditional expectations—that <span class="highlight">unifies Gaussian diffusion and
+                    flow matching without relying on ODE/SDE formulations</span>. Building on this
+                view, we extend Score identity Distillation (SiD) to pretrained text-to-image flowmatching models,
+                including SANA, SD3-MEDIUM, SD3.5-MEDIUM/LARGE,
+                and FLUX.1-DEV, all with DiT backbones. Experiments show that, with only
+                <span class="highlight">modest flow-matching- and DiT-specific adjustments</span>, SiD works out of the
+                box across these models, in
+                both data-free and data-aided settings, without requiring
+                teacher finetuning or architectural changes. This provides the first systematic evidence that <span
+                    class="highlight">score identity distillation applies broadly to text-to-image flow matching
+                    models</span>,
+                resolving prior concerns about stability and soundness and unifying acceleration techniques across
+                diffusion- and flow-based generators.
+            </p>
+        </div>
+
+        <!-- Insert your image here -->
+        <!-- <div>
+            <img src="asset/content/latency_compare.jpg" alt="latency comparison with SOTA methods"
+                class="inserted-image">
+        </div> -->
+
+        <div class="description-content">
+            <h2>Core Highlights</h2>
+            <h3>Unified Framework: Diffusion Distillation Extends to Flow Matching</h3>
+            <p>
+                We establishes a unified theoretical framework demonstrating that diffusion and flow matching models are
+                equivalent under Gaussian assumptions, differing only in the weight-normalized timestep distribution.
+                Using a derivation based on Bayes’ rule and conditional expectations, it reconciles their objectives
+                without relying on SDE or ODE formulations.
+                Building on this insight, we shows that score distillation methods for diffusion models directly extend
+                to flow matching models without requiring teacher finetuning or architectural changes, providing
+                a principled foundation for unifying acceleration techniques across generative paradigms.
+            </p>
+        </div>
+
+        <div class="description-content">
+            <h3>Score Identity Distillation across Major Flow-matching Models</h3>
+            <p>
+
+            </p>
+
+            <!-- <div>
+            <img src="asset/content/model-incremental.jpg" alt="pipeline for Sana" class="inserted-image">
+        </div> -->
+
+            <p>
+                Leveraging this unified perspective, we extend Score Identity Distillation (SiD) to a broad family of
+                DiT-based flow-matching models, forming the SiD-DiT framework.
+                Using a single codebase and hyperparameter configuration, SiD-DiT successfully distills major
+                text-to-image models across diverse architectures and scales, including:
+                <br>
+                • <b> SANA, SANA-Sprint (Rectified Flow & TrigFlow)</b>
+                <br>
+                • <b> SD3, SD3.5 (MMDiT architecture)</b>
+                <br>
+                • <b>FLUX.1-Dev (default learned guidance embedding)</b>
+                <br>
+
+                We represent the comprehensive flow-matching model distillation suite, achieving four-step generation
+                while maintaining or surpassing the teacher’s performance in FID, CLIP, and GenEval metrics.
+            </p>
+        </div>
+
+        <div class="description-content">
+            <h3>Data-Free and Efficient Distillation with Strong Results</h3>
+            <p>
+                Our SiD-DiT operates in a fully data-free manner, relying solely on the pretrained model’s internal
+                predictions without real images or teacher finetuning.
+                It consistently produces high-fidelity and diverse generations, and can be further enhanced by
+                integrating adversarial learning (DiffusionGAN) when auxiliary data are available.
+                The results demonstrate that data-free score distillation is both stable and effective, enabling
+                efficient few-step generation across modern large-scale flow-matching models.
+            </p>
+        </div>
+
+        <!-- <div>
+            <img src="asset/content/sampler.jpg" alt="flow-dpms vs flow-euler" class="inserted-image">
+        </div> -->
+
+        <div class="description-content">
+            <h2>Overall Performance</h2>
+            <p>Extensive experiments demonstrate that <span class="highlight">SiD-DiT achieves state-of-the-art
+                    efficiency and competitiveness
+                    across diverse text-to-image flow-matching models</span>.
+                The framework is evaluated under both data-free and data-aided settings on representative DiT-based
+                architectures, including SANA, SD3, SD3.5, and FLUX, covering models from 0.6B to 12B parameters.
+
+                Across all benchmarks, SiD-DiT reduces generation from 20–40 iterative steps to <span
+                    class="highlight">only four</span>, while
+                <span class="highlight">maintaining or surpassing the teacher models’ performance</span> in standard quantitative metrics such as FID,
+                CLIP score, and GenEval.
+                In data-free scenarios, the distilled generators already match the visual fidelity of the original
+                pretrained models. When augmented with lightweight adversarial refinement, they achieve further FID
+                reductions and improved text–image alignment, surpassing strong baselines such as SANA-Sprint and
+                SD3.5-Turbo.
+            </p>
+        </div>
+
+        <div>
+            <img src="asset/content/performance.png" alt="SiD-DiT performance" class="inserted-image">
+        </div>
+
+        <!-- Video Section -->
+        <!-- <div class="description-content">
+            <h2>Sana-0.6B is Deployable on Laptop GPU</h2>
+        </div>
+        <div class="video-container">
+            <video controls autoplay muted loop>
+                <source src="asset/video/demo-final.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div> -->
+        <!-- End Video Section -->
+
+        <!-- <div class="description-content">
+            <h2>Our Mission</h2>
+            <p>Our mission is to develop <strong>efficient, lightweight, and accelerated</strong>
+                AI technologies that address practical challenges and deliver fast, open-source solutions.</p>
+        </div> -->
+
+        <!--BibTex citation -->
+        <div class="description-content">
+            <h2 class="title">BibTeX</h2>
+        </div>
+        <section class="citation" id="BibTeX">
+            <div class="citation-content">
+                <pre><code>@misc{zhou2025scoredistillationflowmatching,
+      title={Score Distillation of Flow Matching Models}, 
+      author={Mingyuan Zhou and Yi Gu and Huangjie Zheng and Liangchen Song and Guande He and Yizhe Zhang and Wenze Hu and Yinfei Yang},
+      year={2025},
+      eprint={2509.25127},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2509.25127}, 
+    }</code></pre>
+            </div>
+        </section>
+
+    </section>
+    <!--End BibTex citation -->
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p>
+                            This website is licensed under a <a rel="license"
+                                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                                Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+    <script>
+        // Function to open the modal and display the clicked image and description
+        function openModal(img) {
+            var modal = document.getElementById("modal");
+            var modalImg = document.getElementById("modal-img");
+            var modalDescription = document.getElementById("modal-description");
+
+            modal.style.display = "flex";
+            modalImg.src = img.src;
+            modalDescription.textContent = img.getAttribute('data-description'); // Get description from data-description attribute
+        }
+
+        // Add click event listeners to all images in the gallery with their descriptions
+        const images = document.querySelectorAll('.gallery-item img');
+        images.forEach((img) => {
+            img.addEventListener('click', () => openModal(img));
+        });
+    </script>
+
+    <script>
+        const container = document.querySelector('.image-comparison-content');
+        const slider = document.querySelector('.slider');
+        // const slider_black = document.querySelector('.slider-black');
+        const image2 = document.querySelector('.image-2');
+        // const image4 = document.querySelector('.image-4');
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            let xPos = e.clientX - rect.left;
+
+            if (xPos < 0) xPos = 0;
+            if (xPos > rect.width) xPos = rect.width;
+
+            const percentage = (xPos / rect.width) * 100;
+
+            slider.style.left = `${percentage}%`;
+            // slider_black.style.left = `${percentage}%`;
+            image2.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+            // image4.style.clipPath = `inset(0 0 0 ${percentage}%)`;
+        });
+    </script>
+</body>
+
+</html>
