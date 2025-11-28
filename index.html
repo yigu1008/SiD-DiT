@@ -1287,7 +1287,19 @@
             <h3>Adversarial Score Identity Distillation
             </h3>
             <p>
-                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiD<span class="sid-math"><span class="sup">2</span><span class="sub">&alpha;</span></span> variant, which continues training the 
+                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiDSiD
+                <span style="
+                    display:inline-flex;
+                    flex-direction:column;
+                    align-items:center;
+                    font-size:0.6em;
+                    line-height:1;
+                    vertical-align:middle;
+                    margin:0 2px;
+                ">
+                  <span>2</span>
+                  <span>&alpha;</span>
+                </span> variant, which continues training the 
                 distilled model via joint distillation–GAN optimization using an 
                 auxiliary dataset, further enhancing image quality and diversity. In our experiments, we use the
                 <a href="https://huggingface.co/datasets/brivangl/midjourney-v6-llava" target="_blank">Midjourney-v6-LLaVA dataset</a>
@@ -1319,12 +1331,16 @@
                 SD3.5-Turbo.
             </p>
         </div>
+        
 
         <div>
-            <img src="asset/content/performance.png" alt="SiD-DiT performance" class="table1.png">
+            <img src="asset/content/table1.png" alt="SiD-DiT performance" class="inserted-image">
         </div>
         <div>
-            <img src="asset/content/performance.png" alt="SiD-DiT performance" class="table2.png">
+            <img src="asset/content/table2.png" alt="SiD-DiT performance" class="inserted-image">
+        </div>
+        <div>
+            <img src="asset/content/FID_CLIP_3x3_grid.jpg" alt="SiD-DiT performance" class="inserted-image">
         </div>
         <!-- Video Section -->
         <!-- <div class="description-content">
