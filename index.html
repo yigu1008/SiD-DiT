@@ -1250,9 +1250,9 @@
                 while distillation methods alleviate this by enabling one- or few-step generation. Flow matching, originally 
                 introduced as a distinct framework, has since been shown to be theoretically equivalent to diffusion under Gaussian assumptions, raising the question of 
                 whether distillation techniques such as score distillation transfer directly. We provide a simple derivation—based on Bayes’ rule and conditional expectations—that
-                <span class="highlight">unifies Gaussian diffusion and flow matching without relying on ODE/SDE formulations</span>.
+                unifies Gaussian diffusion and flow matching without relying on ODE/SDE formulations.
                 Building on this view, we extend Score Identity Distillation (SiD) to pretrained text-to-image flow-matching models and show that, score distillation applies broadly 
-                and stably to flow-matching generators, providing a principled foundation for unifying acceleration techniques across diffusion- and flow-based models.
+                and stably to flow-matching generators, providing a principled foundation for unifying acceleration techniques across diffusion- and flow-based models. 
         </div>
 
        
@@ -1275,7 +1275,7 @@
             <p>
                 Our SiD-DiT operates in a fully data-free manner, relying solely on the pretrained model’s internal
                 predictions without real images or teacher finetuning.
-                It consistently produces high-fidelity and diverse generations.
+                It consistently produces high-fidelity and diverse generations, see <a href="#table-sana-sprint">Table 1</a> and <a href="#table-sd-flux">Table 2</a> for details .
                 We find that data-free score distillation is both stable and effective, enabling
                 efficient few-step generation across modern large-scale flow-matching models.
                 SiD-DiT inherits the exponentially fast convergence behavior of Score Identity Distillation (SiD): the FID of the distilled generator decreases roughly exponentially with training iterations. 
@@ -1287,18 +1287,18 @@
             <h3>Adversarial Score Identity Distillation
             </h3>
             <p>
-                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiDSiD
-                <span style="
-                    display:inline-flex;
-                    flex-direction:column;
-                    align-items:center;
-                    font-size:0.6em;
-                    line-height:1;
-                    vertical-align:middle;
-                    margin:0 2px;
+                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiD
+                SiD<span style="
+                display:inline-flex;
+                flex-direction:column;
+                align-items:center;
+                font-size:0.6em;
+                line-height:1;
+                vertical-align:middle;
+                margin:0;             /* no extra space */
                 ">
-                  <span>2</span>
-                  <span>&alpha;</span>
+                <span>2</span>
+                <span>&alpha;</span>
                 </span> variant, which continues training the 
                 distilled model via joint distillation–GAN optimization using an 
                 auxiliary dataset, further enhancing image quality and diversity. In our experiments, we use the
@@ -1333,15 +1333,33 @@
         </div>
         
 
-        <div>
-            <img src="asset/content/table1.png" alt="SiD-DiT performance" class="inserted-image">
-        </div>
-        <div>
-            <img src="asset/content/table2.png" alt="SiD-DiT performance" class="inserted-image">
-        </div>
-        <div>
-            <img src="asset/content/FID_CLIP_3x3_grid.jpg" alt="SiD-DiT performance" class="inserted-image">
-        </div>
+        <figure id="table-sana-sprint" style="text-align:center;">
+            <img src="asset/content/table1.png"
+                 alt="SANA / SANA-Sprint results for SiD-DiT"
+                 class="inserted-image">
+            <figcaption style="margin-top:8px; font-size:0.95em; color:#555;">
+                <b>Table 1.</b> Main quantitative comparison of SiD-DiT and baselines across text-to-image backbones.
+            </figcaption>
+        </figure>
+        
+        <figure id="table-sd-flux" style="text-align:center;">
+            <img src="asset/content/table2.png"
+                 alt="SD3 / Flux results for SiD-DiT"
+                 class="inserted-image">
+            <figcaption style="margin-top:8px; font-size:0.95em; color:#555;">
+                <b>Table 2.</b> Detailed results on SANA and SANA-Sprint (Rectified Flow and TrigFlow) with SiD-DiT.
+            </figcaption>
+        </figure>
+        
+        <figure id="fig-fid-clip-grid" style="text-align:center;">
+            <img src="asset/content/FID_CLIP_3x3_grid.jpg"
+                 alt="FID and CLIP trajectories for SiD-DiT"
+                 class="inserted-image">
+            <figcaption style="margin-top:8px; font-size:0.95em; color:#555;">
+                <b>Figure 1.</b> Evolution of FID and CLIP score for SiD-DiT across architectures and model sizes.
+            </figcaption>
+        </figure>
+        
         <!-- Video Section -->
         <!-- <div class="description-content">
             <h2>Sana-0.6B is Deployable on Laptop GPU</h2>
