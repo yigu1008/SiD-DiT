@@ -486,27 +486,6 @@
             /* Limit the width to 80% of the screen */
             text-align: left;
         }
-        .sid-math {
-            display: inline-block;
-            position: relative;
-            margin-left: 1px;
-        }
-
-        .sid-math .sup {
-            position: absolute;
-            top: -0.6em;
-            left: 0;
-            font-size: 0.7em;
-        }
-
-        .sid-math .sub {
-            position: absolute;
-            bottom: -0.4em;
-            left: 0;
-            font-size: 0.7em;
-        }
-
-
         .footer {
             background-color: #f5f5f5;
             box-shadow: 2px 4px 12px #00000054;
@@ -654,7 +633,33 @@
         .image-comparison-content .image-4 {
             clip-path: inset(0 0 0 50%);
         }
+        .sid-math {
+            display: inline-block;
+            position: relative;
+            width: 0.8em;       /* horizontal space reserved for 2/α */
+            height: 0.9em;      /* vertical space reserved */
+            vertical-align: middle;
+            margin-left: 1px;
+            margin-right: 2px;  /* space before "variant" */
+        }
 
+        .sid-math .sup {
+            position: absolute;
+            top: -0.15em;       /* move up */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.6em;
+        }
+
+        .sid-math .sub {
+            position: absolute;
+            bottom: -0.15em;    /* move down */
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.6em;
+        }
         @media (max-width: 4096px) {
             .gallery {
                 /*grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); !* Adjust columns for smaller screens *!*/
