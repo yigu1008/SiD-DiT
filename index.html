@@ -486,6 +486,26 @@
             /* Limit the width to 80% of the screen */
             text-align: left;
         }
+        .sid-math {
+            display: inline-block;
+            position: relative;
+            margin-left: 1px;
+        }
+
+        .sid-math .sup {
+            position: absolute;
+            top: -0.6em;
+            left: 0;
+            font-size: 0.7em;
+        }
+
+        .sid-math .sub {
+            position: absolute;
+            bottom: -0.4em;
+            left: 0;
+            font-size: 0.7em;
+        }
+
 
         .footer {
             background-color: #f5f5f5;
@@ -1176,7 +1196,6 @@
                     "asset/images/web_1024_qual/00005.jpg",
                     "asset/images/web_1024_qual/00006.jpg",
                     "asset/images/web_1024_qual/00007.jpg",
-                    "asset/images/web_1024_qual/00000.jpg",
                 ]
             },
             
@@ -1231,15 +1250,11 @@
                 and stably to flow-matching generators, providing a principled foundation for unifying acceleration techniques across diffusion- and flow-based models.
         </div>
 
-        <!-- Insert your image here -->
-        <!-- <div>
-            <img src="asset/content/latency_compare.jpg" alt="latency comparison with SOTA methods"
-                class="inserted-image">
-        </div> -->
+       
 
         <div class="description-content">
             <h2>Core Highlights</h2>
-            <<h3>Unified data-free distillation framework for flow-matching T2I models</h3>
+            <h3>Unified data-free distillation framework for flow-matching T2I models</h3>
             <p>
             Leveraging this unified perspective, SiD-DiT provides a practical, out-of-the-box distillation framework for flow-matching text-to-image models <b>without any requirement on real image data</b>.
             Our implementation is compatible with most open-source DiT-style architectures (including Efficient DiT and MMDiT variants) and supports diverse noise schedules such as Rectified Flow and Trig Flow.
@@ -1267,7 +1282,8 @@
             <h3>Adversarial Score Identity Distillation
             </h3>
             <p>
-                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiD<sup>2</sup><sub>&alpha;</sub> variant, which continues training the distilled model via joint distillation–GAN optimization using an 
+                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiD<span class="sid-math"><span class="sup">2</span><span class="sub">&alpha;</span></span> variant, which continues training the 
+                distilled model via joint distillation–GAN optimization using an 
                 auxiliary dataset, further enhancing image quality and diversity. In our experiments, we use the
                 <a href="https://huggingface.co/datasets/brivangl/midjourney-v6-llava" target="_blank">Midjourney-v6-LLaVA dataset</a>
                 as auxiliary data, and users are encouraged to explore other high-quality datasets within the same framework.
@@ -1300,9 +1316,11 @@
         </div>
 
         <div>
-            <img src="asset/content/performance.png" alt="SiD-DiT performance" class="inserted-image">
+            <img src="asset/content/performance.png" alt="SiD-DiT performance" class="table1.png">
         </div>
-
+        <div>
+            <img src="asset/content/performance.png" alt="SiD-DiT performance" class="table2.png">
+        </div>
         <!-- Video Section -->
         <!-- <div class="description-content">
             <h2>Sana-0.6B is Deployable on Laptop GPU</h2>
