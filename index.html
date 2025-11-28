@@ -948,7 +948,7 @@
 
         <a href="https://arxiv.org/abs/2509.25127" class="button">Paper</a>
         <a href="https://github.com/NVlabs/Sana" class="button">Code</a>
-        <a href="https://huggingface.co/collections/Efficient-Large-Model/sana-673efba2a57ed99843f11f9e"
+        <a href="https://huggingface.co/collections/YGu1998/sid-dit"
             class="button">Huggingface</a>
         <a href="https://huggingface.co/spaces/YGu1998/sid-dit" class="button">Demo</a>
         <!-- <a href="https://sana.hanlab.ai/4bit/" class="button">4bit Demo</a>
@@ -1166,16 +1166,17 @@
             },
             "flux-1024": {
                 label: "FLUX-1024px",
-                grid: "asset/images/flux-1024/grid_2x4_000_1762560249.png",
+                grid: "asset/images/web_1024_qual/grid_2x4.png",
                 images: [
-                    "asset/images/flux-1024/0000_A_large_airplane_flying_through_dramatic_cloudy_skies_captur_42.png",
-                    "asset/images/flux-1024/0001_Painting_of_a_family_standing_in_front_of_a_red_parking_mete_1337.png",
-                    "asset/images/flux-1024/0002_Digital_artwork_of_a_cozy_couch_with_cupcakes_and_a_cake_str_212823364.png",
-                    "asset/images/flux-1024/0003_Photograph_of_a_herd_of_cows_standing_in_tall_grass_under_an_714891957.png",
-                    "asset/images/flux-1024/0004_Close-up_photo_of_a_black_and_white_dog_resting_its_head_on_108616197.png",
-                    "asset/images/flux-1024/0005_Digital_artwork_of_an_astronaut_standing_in_a_rocky_cave_loo_921087729.png",
-                    "asset/images/flux-1024/0006_Illustration_of_a_woman_jumping_indoors_playing_with_colorfu_2057357598.png",
-                    "asset/images/flux-1024/0007_A_man_sitting_on_a_bed_reading_a_book_modern_bedroom_interio_1612006472.png"
+                    "asset/images/web_1024_qual/00000.jpg",
+                    "asset/images/web_1024_qual/00001.jpg",
+                    "asset/images/web_1024_qual/00002.jpg",
+                    "asset/images/web_1024_qual/00003.jpg",
+                    "asset/images/web_1024_qual/00004.jpg",
+                    "asset/images/web_1024_qual/00005.jpg",
+                    "asset/images/web_1024_qual/00006.jpg",
+                    "asset/images/web_1024_qual/00007.jpg",
+                    "asset/images/web_1024_qual/00000.jpg",
                 ]
             },
             
@@ -1221,26 +1222,13 @@
 
         <div class="description-content">
             <h2>About SiD-DiT</h2>
-            <p>Diffusion models achieve high-quality image generation but are limited by slow
-                iterative sampling. Distillation methods alleviate this by enabling one- or fewstep generation. Flow
-                matching, originally introduced as a distinct framework,
-                has since been shown to be theoretically equivalent to diffusion under Gaussian assumptions, raising the
-                question of whether distillation techniques such as
-                score distillation transfer directly. We provide a simple derivation—based on
-                Bayes’ rule and conditional expectations—that <span class="highlight">unifies Gaussian diffusion and
-                    flow matching without relying on ODE/SDE formulations</span>. Building on this
-                view, we extend Score identity Distillation (SiD) to pretrained text-to-image flowmatching models,
-                including SANA, SD3-MEDIUM, SD3.5-MEDIUM/LARGE,
-                and FLUX.1-DEV, all with DiT backbones. Experiments show that, with only
-                <span class="highlight">modest flow-matching- and DiT-specific adjustments</span>, SiD works out of the
-                box across these models, in
-                both data-free and data-aided settings, without requiring
-                teacher finetuning or architectural changes. This provides the first systematic evidence that <span
-                    class="highlight">score identity distillation applies broadly to text-to-image flow matching
-                    models</span>,
-                resolving prior concerns about stability and soundness and unifying acceleration techniques across
-                diffusion- and flow-based generators.
-            </p>
+            <p>Diffusion models achieve high-quality image generation but are limited by slow iterative sampling, 
+                while distillation methods alleviate this by enabling one- or few-step generation. Flow matching, originally 
+                introduced as a distinct framework, has since been shown to be theoretically equivalent to diffusion under Gaussian assumptions, raising the question of 
+                whether distillation techniques such as score distillation transfer directly. We provide a simple derivation—based on Bayes’ rule and conditional expectations—that
+                <span class="highlight">unifies Gaussian diffusion and flow matching without relying on ODE/SDE formulations</span>.
+                Building on this view, we extend Score Identity Distillation (SiD) to pretrained text-to-image flow-matching models and show that, score distillation applies broadly 
+                and stably to flow-matching generators, providing a principled foundation for unifying acceleration techniques across diffusion- and flow-based models.
         </div>
 
         <!-- Insert your image here -->
@@ -1251,57 +1239,42 @@
 
         <div class="description-content">
             <h2>Core Highlights</h2>
-            <h3>Unified Framework: Diffusion Distillation Extends to Flow Matching</h3>
+            <<h3>Unified data-free distillation framework for flow-matching T2I models</h3>
             <p>
-                We establishes a unified theoretical framework demonstrating that diffusion and flow matching models are
-                equivalent under Gaussian assumptions, differing only in the weight-normalized timestep distribution.
-                Using a derivation based on Bayes’ rule and conditional expectations, it reconciles their objectives
-                without relying on SDE or ODE formulations.
-                Building on this insight, we shows that score distillation methods for diffusion models directly extend
-                to flow matching models without requiring teacher finetuning or architectural changes, providing
-                a principled foundation for unifying acceleration techniques across generative paradigms.
+            Leveraging this unified perspective, SiD-DiT provides a practical, out-of-the-box distillation framework for flow-matching text-to-image models <b>without any requirement on real image data</b>.
+            Our implementation is compatible with most open-source DiT-style architectures (including Efficient DiT and MMDiT variants) and supports diverse noise schedules such as Rectified Flow and Trig Flow.
+            Using a single codebase and largely shared hyperparameters, SiD-DiT successfully distills a broad family of pretrained flow-matching T2I models,
+            including <b>SANA and SANA-Sprint</b>, <b>SD3 and SD3.5</b>, and <b>FLUX.1-Dev</b>, across scales from 0.6B to 12B parameters.
+            The framework is designed to be easily extensible to future architectures and flow-matching variants, turning SiD into a unified, data-free distillation toolkit for modern text-to-image models.
             </p>
         </div>
+        
 
         <div class="description-content">
-            <h3>Score Identity Distillation across Major Flow-matching Models</h3>
-            <p>
-
-            </p>
-
-            <!-- <div>
-            <img src="asset/content/model-incremental.jpg" alt="pipeline for Sana" class="inserted-image">
-        </div> -->
-
-            <p>
-                Leveraging this unified perspective, we extend Score Identity Distillation (SiD) to a broad family of
-                DiT-based flow-matching models, forming the SiD-DiT framework.
-                Using a single codebase and hyperparameter configuration, SiD-DiT successfully distills major
-                text-to-image models across diverse architectures and scales, including:
-                <br>
-                • <b> SANA, SANA-Sprint (Rectified Flow & TrigFlow)</b>
-                <br>
-                • <b> SD3, SD3.5 (MMDiT architecture)</b>
-                <br>
-                • <b>FLUX.1-Dev (default learned guidance embedding)</b>
-                <br>
-
-                We represent the comprehensive flow-matching model distillation suite, achieving four-step generation
-                while maintaining or surpassing the teacher’s performance in FID, CLIP, and GenEval metrics.
-            </p>
-        </div>
-
-        <div class="description-content">
-            <h3>Data-Free and Efficient Distillation with Strong Results</h3>
+            <h3>Data-Free and Efficient Distillation with Rapid convergence</h3>
             <p>
                 Our SiD-DiT operates in a fully data-free manner, relying solely on the pretrained model’s internal
                 predictions without real images or teacher finetuning.
-                It consistently produces high-fidelity and diverse generations, and can be further enhanced by
-                integrating adversarial learning (DiffusionGAN) when auxiliary data are available.
-                The results demonstrate that data-free score distillation is both stable and effective, enabling
+                It consistently produces high-fidelity and diverse generations.
+                We find that data-free score distillation is both stable and effective, enabling
                 efficient few-step generation across modern large-scale flow-matching models.
+                SiD-DiT inherits the exponentially fast convergence behavior of Score Identity Distillation (SiD): the FID of the distilled generator decreases roughly exponentially with training iterations. 
+                Although this effect was originally demonstrated on small- and medium-sized diffusion models, our large-scale flow-matching variants (e.g., DiT-based text-to-image backbones) retain the same rapid convergence in practice. 
             </p>
         </div>
+
+        <div class="description-content">
+            <h3>Adversarial Score Identity Distillation
+            </h3>
+            <p>
+                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiD<sup>2</sup><sub>&alpha;</sub> variant, which continues training the distilled model via joint distillation–GAN optimization using an 
+                auxiliary dataset, further enhancing image quality and diversity. In our experiments, we use the
+                <a href="https://huggingface.co/datasets/brivangl/midjourney-v6-llava" target="_blank">Midjourney-v6-LLaVA dataset</a>
+                as auxiliary data, and users are encouraged to explore other high-quality datasets within the same framework.
+            </p>
+        </div>
+
+        
 
         <!-- <div>
             <img src="asset/content/sampler.jpg" alt="flow-dpms vs flow-euler" class="inserted-image">
