@@ -1273,7 +1273,7 @@
         <div class="description-content">
             <h3>Data-Free Distillation for High-Quality Image Generation</h3>
             <p>
-                Our SiD-DiT operates in a </b>fully data-free manner</b>, relying solely on the pretrained model’s internal
+                Our SiD-DiT operates in a <b>fully data-free manner<b>, relying solely on the pretrained model’s internal
                 predictions without real images or teacher finetuning.
                 It consistently produces high-fidelity and diverse generations. Detailed comparison with teacher model and DiT distillation baselines can be found in <a href="#table-sana-sprint">Table 1</a> and <a href="#table-sd-flux">Table 2</a> for detailed quantitative metrics on FiD, CLIP, GenEval and human prefernce scores (e.g. PickScore).
             </p>
@@ -1284,9 +1284,8 @@
             <p>
                 We find that data-free score distillation  is both stable and effective, enabling
                 efficient few-step generation across modern large-scale flow-matching models.
-                SiD-DiT inherits the </b>exponentially fast convergence</b> behavior of Score Identity Distillation (SiD): the FID of the distilled generator decreases roughly exponentially with training iterations. 
+                SiD-DiT inherits the <b>exponentially fast convergence<b> behavior of Score Identity Distillation (SiD): the FID of the distilled generator decreases roughly exponentially with training iterations. 
                 Although this effect was originally demonstrated on small- and medium-sized diffusion models, our large-scale flow-matching variants (e.g., DiT-based text-to-image backbones) retain the same <a href="#fig-fid-clip-grid">rapid convergence</a>. &nbsp;
-                in practice. 
             </p>
         </div>
         
@@ -1331,15 +1330,15 @@
 
         <div class="description-content">
             <h2>Quantitative Evaluation of Performance</h2>
-            <p>Extensive experiments demonstrate that </b>SiD-DiT achieves state-of-the-art
+            <p>Extensive experiments demonstrate that <b>SiD-DiT achieves state-of-the-art
                     efficiency and competitiveness
-                    across diverse text-to-image flow-matching models</b>.
+                    across diverse text-to-image flow-matching models<b>.
                 The framework is evaluated under both data-free and data-aided settings on representative DiT-based
                 architectures, including SANA, SD3, SD3.5, and FLUX, covering models from 0.6B to 12B parameters.
 
-                Across all benchmarks, SiD-DiT reduces generation from 20–40 iterative steps to <span
-            </b>only 4</b>, while
-                </b>maintaining or surpassing the teacher models’ performance</b> in standard quantitative metrics such as FID,
+                Across all benchmarks, SiD-DiT reduces generation from 20–40 iterative steps to
+            <b>only 4 steps<b>, while
+                <b>maintaining or surpassing the teacher models’ performance<b> in standard quantitative metrics such as FID,
                 CLIP score, GenEval, PickScore, ImageReward, etc.
                 In data-free scenarios, the distilled generators already match the visual fidelity of the original
                 pretrained models. When augmented with lightweight adversarial refinement, they achieve further FID
