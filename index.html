@@ -1261,7 +1261,7 @@
             <h2>Core Highlights</h2>
             <h3>Unified data-free distillation framework for flow-matching T2I models</h3>
             <p>
-            Leveraging this unified perspective, SiD-DiT provides a practical, out-of-the-box distillation framework for flow-matching text-to-image models <b>without any requirement on real image data</b>.
+            Leveraging this unified perspective, SiD-DiT provides a practical, out-of-the-box distillation framework for flow-matching text-to-image models without any requirement on real image data.
             Our implementation is compatible with most open-source DiT-style architectures (including Efficient DiT and MMDiT variants) and supports diverse noise schedules such as Rectified Flow and Trig Flow.
             Using a single codebase and largely shared hyperparameters, SiD-DiT successfully distills a broad family of pretrained flow-matching T2I models,
             including <b>SANA and SANA-Sprint</b>, <b>SD3 and SD3.5</b>, and <b>FLUX.1-Dev</b>, across scales from 0.6B to 12B parameters.
@@ -1273,7 +1273,7 @@
         <div class="description-content">
             <h3>Data-Free Distillation for High-Quality Image Generation</h3>
             <p>
-                Our SiD-DiT operates in a fully data-free manner, relying solely on the pretrained model’s internal
+                Our SiD-DiT operates in a <span class="highlight">fully data-free manner</span>, relying solely on the pretrained model’s internal
                 predictions without real images or teacher finetuning.
                 It consistently produces high-fidelity and diverse generations. Detailed comparison with teacher model and DiT distillation baselines can be found in <a href="#table-sana-sprint">Table 1</a> and <a href="#table-sd-flux">Table 2</a> for detailed quantitative metrics on FiD, CLIP, GenEval and human prefernce scores (e.g. PickScore).
             </p>
@@ -1282,9 +1282,9 @@
         <div class="description-content">
             <h3> Exponentially Fast convergence</h3>
             <p>
-                We find that data-free score distillation is both stable and effective, enabling
+                We find that data-free score distillation  is both stable and effective, enabling
                 efficient few-step generation across modern large-scale flow-matching models.
-                SiD-DiT inherits the exponentially fast convergence behavior of Score Identity Distillation (SiD): the FID of the distilled generator decreases roughly exponentially with training iterations. 
+                SiD-DiT inherits the <span class="highlight">exponentially fast convergence</span> behavior of Score Identity Distillation (SiD): the FID of the distilled generator decreases roughly exponentially with training iterations. 
                 Although this effect was originally demonstrated on small- and medium-sized diffusion models, our large-scale flow-matching variants (e.g., DiT-based text-to-image backbones) retain the same <a href="#fig-fid-clip-grid">rapid convergence</a> in Figure&nbsp;1. 
                 in practice. 
             </p>
@@ -1294,7 +1294,7 @@
             <img src="asset/content/FID_CLIP_3x3_grid.jpg"
                  alt="FID and CLIP trajectories for SiD-DiT"
                  class="inserted-image"
-                 style="max-width:65%; height:auto;">
+                 style="max-width:45%; height:auto;">
             <figcaption style="margin-top:8px; font-size:0.95em; color:#555;">
                 <b>Figure 1.</b> Evolution of FID and CLIP score for SiD-DiT across architectures and model sizes.
             </figcaption>
