@@ -65,7 +65,7 @@
 </head>
 <body>
     <div class="hero">
-        <h1>SiD-DiT Tutorial</h1>
+        <h1>Quick Guide for using SiD-DiT Pipelines</h1>
         <p>Quick start guide for running distilled flow-matching T2I models.</p>
         <a href="index.html" class="button">Back to Main Page</a>
     </div>
@@ -76,102 +76,102 @@
             First clone the SiD pipelines repository from Hugging Face, then install the required Python packages:
         </p>
         <pre><code class="language-bash"># clone the SiD pipelines repo
-        git clone https://huggingface.co/YGu1998/SiD_pipelines
+git clone https://huggingface.co/YGu1998/SiD_pipelines
 
-        # go into the repo
-        cd SiD_pipelines
+# go into the repo
+cd SiD_pipelines
 
-        # install dependencies
-        pip install -r requirements.txt
+# install dependencies
+pip install -r requirements.txt
 
-        cd ..
+cd ..
         </code></pre>
 
         <h2>2.1. Inference with SiD-DiT SANA Rectified Flow</h2>
         <pre><code class="language-python"> import torch
-        from SiD_pipelines import SiDSanaPipeline
-        prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
-        model_repo_id = "YGu1998/SiD-Flow-Sana-0.6B-512-res"
-        pipe = SiDSanaPipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
-        generator = torch.Generator().manual_seed(42)
-    
-        time_scale = 1000 # for SANA Rectified Flow, 1000 for SANA TrigFlow
-        num_inference_steps=4
-        resolution = 512
-        image = pipe(
-            prompt=prompt,
-            guidance_scale=1,
-            num_inference_steps=num_inference_steps,
-            width=resolution,
-            height=resolution,
-            generator=generator,
-            time_scale=time_scale,
-        ).images[0]
+from SiD_pipelines import SiDSanaPipeline
+prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
+model_repo_id = "YGu1998/SiD-Flow-Sana-0.6B-512-res"
+pipe = SiDSanaPipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
+generator = torch.Generator().manual_seed(42)
+
+time_scale = 1000 # for SANA Rectified Flow, 1000 for SANA TrigFlow
+num_inference_steps=4
+resolution = 512
+image = pipe(
+    prompt=prompt,
+    guidance_scale=1,
+    num_inference_steps=num_inference_steps,
+    width=resolution,
+    height=resolution,
+    generator=generator,
+    time_scale=time_scale,
+).images[0]
         </code></pre>
         <h2>2.2. Inference with SiD-DiT SANA Trig Flow</h2>
         <pre><code class="language-python"> import torch
-        from SiD_pipelines import  SiDSanaPipeline
-        prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
-        model_repo_id = "YGu1998/SiD-Flow-Sana-Sprint-0.6B-1024-res"
-        pipe = SiDSanaPipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
-        generator = torch.Generator().manual_seed(42)
-    
-        time_scale = 1 
-        num_inference_steps=4
-        resolution = 1024
-        image = pipe(
-            prompt=prompt,
-            guidance_scale=1,
-            num_inference_steps=num_inference_steps,
-            width=resolution,
-            height=resolution,
-            generator=generator,
-            time_scale=time_scale,
-        ).images[0]
+from SiD_pipelines import  SiDSanaPipeline
+prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
+model_repo_id = "YGu1998/SiD-Flow-Sana-Sprint-0.6B-1024-res"
+pipe = SiDSanaPipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
+generator = torch.Generator().manual_seed(42)
+
+time_scale = 1 
+num_inference_steps=4
+resolution = 1024
+image = pipe(
+    prompt=prompt,
+    guidance_scale=1,
+    num_inference_steps=num_inference_steps,
+    width=resolution,
+    height=resolution,
+    generator=generator,
+    time_scale=time_scale,
+).images[0]
         </code></pre>
 
         <h2>3. Inference with SiD-DiT SD3/SD3.5</h2>
         <pre><code class="language-python">import torch
-        from SiD_pipelines import SiDSD3Pipeline
-        prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
-        model_repo_id = "YGu1998/SiD-Flow-SD3.5-medium"
-        pipe = SiDSD3Pipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
-        generator = torch.Generator().manual_seed(42)
-    
-        time_scale = 1000 # for SANA Rectified Flow, 1000 for SANA TrigFlow
-        num_inference_steps=4
-        resolution = 1024
-        image = pipe(
-            prompt=prompt,
-            guidance_scale=1,
-            num_inference_steps=num_inference_steps,
-            width=resolution,
-            height=resolution,
-            generator=generator,
-            time_scale=time_scale,
-        ).images[0]
-        </code></pre>
+from SiD_pipelines import SiDSD3Pipeline
+prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
+model_repo_id = "YGu1998/SiD-Flow-SD3.5-medium"
+pipe = SiDSD3Pipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
+generator = torch.Generator().manual_seed(42)
 
-        <h2>3. Inference with SiD-DiT Flux</h2>
-        <pre><code class="language-python">import torch
-    from SiD_pipelines import SiDFluxPipeline
-    prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
-    model_repo_id = "YGu1998/SiD-Flow-Flux-512-res"
-    pipe = SiDFluxPipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
-    generator = torch.Generator().manual_seed(42)
+time_scale = 1000 # for SANA Rectified Flow, 1000 for SANA TrigFlow
+num_inference_steps=4
+resolution = 1024
+image = pipe(
+    prompt=prompt,
+    guidance_scale=1,
+    num_inference_steps=num_inference_steps,
+    width=resolution,
+    height=resolution,
+    generator=generator,
+    time_scale=time_scale,
+).images[0]
+    </code></pre>
 
-    time_scale = 1000 # for SANA Rectified Flow, 1000 for SANA TrigFlow
-    num_inference_steps=4
-    resolution = 512
-    image = pipe(
-        prompt=prompt,
-        guidance_scale=1,
-        num_inference_steps=num_inference_steps,
-        width=resolution,
-        height=resolution,
-        generator=generator,
-        time_scale=time_scale,
-    ).images[0]
+    <h2>3. Inference with SiD-DiT Flux</h2>
+    <pre><code class="language-python">import torch
+from SiD_pipelines import SiDFluxPipeline
+prompt = ["a studio portrait of an elderly woman smiling, soft window light, 85mm lens"]
+model_repo_id = "YGu1998/SiD-Flow-Flux-512-res"
+pipe = SiDFluxPipeline.from_pretrained(model_repo_id, torch_dtype=torch_dtype)        
+generator = torch.Generator().manual_seed(42)
+
+time_scale = 1000 # for SANA Rectified Flow, 1000 for SANA TrigFlow
+num_inference_steps=4
+resolution = 512
+image = pipe(
+    prompt=prompt,
+    guidance_scale=1,
+    num_inference_steps=num_inference_steps,
+    width=resolution,
+    height=resolution,
+    generator=generator,
+    time_scale=time_scale,
+).images[0]
         </code></pre>
     </div>
 </body>
