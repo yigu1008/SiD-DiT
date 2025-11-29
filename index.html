@@ -1251,7 +1251,7 @@
                 introduced as a distinct framework, has since been shown to be theoretically equivalent to diffusion under Gaussian assumptions, raising the question of 
                 whether distillation techniques such as score distillation transfer directly. We provide a simple derivation—based on Bayes’ rule and conditional expectations—that
                 unifies Gaussian diffusion and flow matching without relying on ODE/SDE formulations.
-                Building on this view, we extend Score Identity Distillation (SiD) to pretrained text-to-image flow-matching models and show that, score distillation applies broadly 
+                Building on this view, we extend Score Identity Distillation (<a href="https://github.com/mingyuanzhou/SiD" target="_blank">SiD</a>) to pretrained text-to-image flow-matching models and show that, score distillation applies broadly 
                 and stably to flow-matching generators, providing a principled foundation for unifying acceleration techniques across diffusion- and flow-based models. 
         </div>
 
@@ -1303,7 +1303,7 @@
             <h3>Adversarial Score Identity Distillation
             </h3>
             <p>
-                We further integrate Adversarial Score Identity Distillation (SiDA), implemented as the SiD
+                We further integrate Adversarial Score Identity Distillation (<a href="https://github.com/mingyuanzhou/SiD/tree/sida" target="_blank">SiDA</a>), implemented as the SiD
                 SiD<span style="
                 display:inline-flex;
                 flex-direction:column;
@@ -1330,7 +1330,7 @@
         </div> -->
 
         <div class="description-content">
-            <h2>Overall Performance</h2>
+            <h2>Quantitative Evaluation of Performance</h2>
             <p>Extensive experiments demonstrate that <span class="highlight">SiD-DiT achieves state-of-the-art
                     efficiency and competitiveness
                     across diverse text-to-image flow-matching models</span>.
@@ -1340,7 +1340,7 @@
                 Across all benchmarks, SiD-DiT reduces generation from 20–40 iterative steps to <span
                     class="highlight">only four</span>, while
                 <span class="highlight">maintaining or surpassing the teacher models’ performance</span> in standard quantitative metrics such as FID,
-                CLIP score, and GenEval.
+                CLIP score, GenEval, PickScore, ImageReward, etc.
                 In data-free scenarios, the distilled generators already match the visual fidelity of the original
                 pretrained models. When augmented with lightweight adversarial refinement, they achieve further FID
                 reductions and improved text–image alignment, surpassing strong baselines such as SANA-Sprint and
