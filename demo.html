@@ -1,81 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SiD-DiT / SiD-alpha-DiT Demos</title>
+  <meta charset="UTF-8" />
+  <title>SiD-DiT / SiD-α-DiT Demos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif; margin: 40px; }
-    h1 { margin-bottom: 0.2em; }
-    h2 { margin-top: 1.8em; }
-    ul { list-style: none; padding-left: 0; }
-    li { margin: 4px 0; }
-    a { text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    :root {
+      --hf-yellow: #ffcc4d;
+      --hf-yellow-soft: #fff7dc;
+      --bg: #f5f5f7;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --border-strong: #d1d5db;
+      --card-bg: #ffffff;
+      --radius-lg: 12px;
+      --radius-md: 10px;
+      --shadow-card: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+      padding: 24px 16px 40px;
+    }
+
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px 14px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .eyebrow-pill {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--hf-yellow-soft);
+      border: 1px solid rgba(251, 191, 36, 0.5);
+      color: #92400e;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.2rem);
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #4b5563;
+      border: 1px solid #e5e7eb;
+    }
+
+    .callout {
+      margin-top: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: var(--hf-yellow-soft);
+      border: 1px solid rgba(251, 191, 36, 0.7);
+      font-size: 0.8rem;
+      color: #78350f;
+    }
+
+    .callout p {
+      margin: 2px 0;
+    }
+
+    .callout a {
+      color: #b45309;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .callout a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .section {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      padding: 16px 18px 14px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .section-pill {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      padding: 2px 8px;
+      background: #f9fafb;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .card-link {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      background: #f9fafb;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition:
+        border-color 0.12s ease,
+        box-shadow 0.12s ease,
+        background-color 0.12s ease,
+        transform 0.12s ease;
+    }
+
+    .card-link span.model-name {
+      font-size: 0.94rem;
+      font-weight: 500;
+    }
+
+    .card-link span.model-label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .card-link:hover {
+      border-color: var(--hf-yellow);
+      background-color: #ffffff;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+      transform: translateY(-1px);
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 16px 12px 28px;
+      }
+      header {
+        padding: 14px 14px 12px;
+      }
+      .section {
+        padding: 14px 14px 12px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>SiD-DiT – Interactive Demos</h1>
-  <p>Click a model below to open its Hugging Face Space demo.</p>
+  <div class="page">
+    <header>
+      <div class="eyebrow">
+        <span class="eyebrow-pill">SiD-DiT demos</span>
+        <span>Score distillation of flow-matching models</span>
+      </div>
+      <h1>SiD-DiT &amp; SiD-α-DiT – Interactive Spaces</h1>
+      <p class="subtitle">
+        Browse interactive Hugging Face Space demos for score-distilled few-step
+        text-to-image generators across Stable Diffusion&nbsp;3 / 3.5, SANA Rectified Flow,
+        SANA Sprint (TrigFlow), and FLUX-based models.
+      </p>
+      <div class="tags">
+        <span class="tag">text-to-image</span>
+        <span class="tag">score distillation</span>
+        <span class="tag">flow-matching</span>
+        <span class="tag">few-step sampling</span>
+      </div>
+      <div class="callout">
+        <p>
+          All <strong>SANA-based SiD-DiT checkpoints</strong> are hosted in the Hugging Face
+          collection
+          <a href="https://huggingface.co/collections/YGu1998/sid-dit" target="_blank" rel="noopener noreferrer">
+            YGu1998/sid-dit
+          </a>.
+        </p>
+        <p>
+          Note: the first request on each Space may take extra time while the model weights
+          are loaded (especially for larger SANA and SD3.5 models).
+        </p>
+      </div>
+    </header>
 
-  <h2>Stable Diffusion 3 / 3.5</h2>
-  <ul>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SD3-medium" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-SD3-medium
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-alpha-DiT-SD3-medium" target="_blank" rel="noopener noreferrer">
-      SiD-alpha-DiT-SD3-medium
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SD3.5-medium" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-SD3.5-medium
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-alpha-DiT-SD3.5-medium" target="_blank" rel="noopener noreferrer">
-      SiD-alpha-DiT-SD3.5-medium
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SD3.5-large" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-SD3.5-large
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-alpha-SD3.5-large" target="_blank" rel="noopener noreferrer">
-      SiD-alpha-SD3.5-large
-    </a></li>
-  </ul>
-
-  <h2>SANA Rectified Flow</h2>
-  <ul>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SANA-0.6B-RectifiedFlow" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-SANA-0.6B-RectifiedFlow
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SANA-1.6B-RectifiedFlow" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-SANA-1.6B-RectifiedFlow
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-alpha-DiT-SANA-1.6B-RectifiedFlow" target="_blank" rel="noopener noreferrer">
-      SiD-alpha-DiT-SANA-1.6B-RectifiedFlow
-    </a></li>
-  </ul>
-
-  <h2>SANA Sprint (TrigFlow)</h2>
-  <ul>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SANA-0.6B-TrigFlow" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-SANA-0.6B-TrigFlow
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SANA-1.6B-TrigFlow" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-SANA-1.6B-TrigFlow
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-alpha-DiT-SANA-0.6B-TrigFlow" target="_blank" rel="noopener noreferrer">
-      SiD-alpha-DiT-SANA-0.6B-TrigFlow
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-alpha-DiT-SANA-1.6B-TrigFlow" target="_blank" rel="noopener noreferrer">
-      SiD-alpha-DiT-SANA-1.6B-TrigFlow
-    </a></li>
-  </ul>
-
-  <h2>FLUX</h2>
-  <ul>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-Flux-512-res" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-Flux-512-res
-    </a></li>
-    <li><a href="https://huggingface.co/spaces/YGu1998/SiD-DiT-Flux-1024-res" target="_blank" rel="noopener noreferrer">
-      SiD-DiT-Flux-1024-res
-    </a></li>
-  </ul>
-</body>
-</html>
+    <main>
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title">Stable Diffusion 3 / 3.5</div>
+          <div class="section-pill">SD3 family</div>
+        </div>
+        <ul class="grid">
+          <li>
+            <a
+              class="card-link"
+              href="https://huggingface.co/spaces/YGu1998/SiD-DiT-SD3-medium"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="model-name">SiD-DiT-SD3-medium</span>
+              <span class="model-label">Few-step student of SD3 Medium</span>
+            </a>
+          </li>
+          <li>
+            <a
+              class="card-link"
+              href="https://huggingface.co/spaces/YGu1998/SiD-alpha-DiT-SD3-medium"
+              target="_blank"
+              rel="noopene
